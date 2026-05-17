@@ -22,10 +22,14 @@ dist/
 .next/
 .nuxt/
 .cache/
+*.tsbuildinfo
 
 # Environment
 .env
 !.env.example
+
+# Claude Code
+.claude/
 
 # IDE
 .vscode/
