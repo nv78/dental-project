@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import Base, engine
 from app.routers.calculator import router as calculator_router
+from app.routers.payments import router as payments_router
 from app.routers.verification import router as verification_router
 
 
@@ -30,6 +31,7 @@ def create_app() -> FastAPI:
     )
 
     app.include_router(calculator_router)
+    app.include_router(payments_router)
     app.include_router(verification_router)
 
     @app.get("/health")
