@@ -1,3 +1,5 @@
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:5173";
+
 export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-dental-100">
@@ -9,10 +11,10 @@ export default function Navbar() {
           <a href="#pricing" className="hover:text-dental-600 transition-colors">Pricing</a>
         </div>
         <a
-          href="#contact"
+          href={APP_URL}
           className="bg-dental-600 hover:bg-dental-700 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-colors"
         >
-          Book a demo
+          Open app
         </a>
       </div>
     </nav>

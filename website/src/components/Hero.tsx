@@ -1,3 +1,5 @@
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:5173";
+
 export default function Hero() {
   return (
     <section className="bg-gradient-to-b from-dental-50 to-white pt-20 pb-28 px-6 text-center">
@@ -15,7 +17,7 @@ export default function Hero() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href="#contact"
+            href={APP_URL}
             className="bg-dental-600 hover:bg-dental-700 text-white font-semibold px-8 py-3 rounded-xl text-lg transition-colors shadow-lg shadow-dental-500/30"
           >
             Get started free
