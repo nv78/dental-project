@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 class CalculateRequest(BaseModel):
@@ -51,3 +51,39 @@ class CalculationRecordSchema(BaseModel):
     created_at: datetime
 
     model_config = {"from_attributes": True}
+
+
+class CreatePlanRequest(BaseModel):
+    calculation_record_id: int | None = None
+    patient_phone: str | None = None
+    total_amount: float = Field(gt=0)
+    months: int = Field(ge=1, le=12)
+
+
+class InstallmentSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id: int
+    installment_number: int
+    amount: float
+    due_date: datetime
+    paid_at: datetime | None
+    status: str
+
+
+class PaymentPlanSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id: int
+    total_amount: float
+    months: int
+    monthly_payment: float
+    status: str
+    created_at: datetime
+    installments: list[InstallmentSchema]
+
+
+class MonerisWebhookPayload(BaseModel):
+    event_type: str
+    order_id: str
+    plan_id: int
+    amount: float
+    timestamp: str
