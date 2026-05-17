@@ -3,12 +3,15 @@ from __future__ import annotations
 import os
 from collections.abc import Generator
 
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
+load_dotenv()
+
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "mysql+pymysql://dental:dental@db:3306/dental",
+    "mysql+pymysql://dental:dental@localhost:3306/dental",
 )
 
 engine = create_engine(
