@@ -53,6 +53,39 @@ class CalculationRecordSchema(BaseModel):
     model_config = {"from_attributes": True}
 
 
+class VerifyRequest(BaseModel):
+    procedure_code: str
+    procedure_cost: float = Field(gt=0)
+    insurance_plan_type: str = Field(pattern="^(PPO|HMO|EPO|DHMO)$")
+    patient_age: int = Field(ge=0, le=120)
+
+
+class VerifyResponse(BaseModel):
+    procedure_code: str
+    procedure_cost: float
+    insurance_plan_type: str
+    predicted_coverage_pct: float
+    approval_probability: float
+    risk_factors: list[str]
+    recommended_action: str
+    estimated_insurance_payment: float
+    estimated_patient_cost: float
+
+
+class VerificationRecordSchema(BaseModel):
+    id: int
+    procedure_code: str
+    procedure_cost: float
+    insurance_plan_type: str
+    patient_age: int
+    predicted_coverage_pct: float
+    approval_probability: float
+    recommended_action: str
+    created_at: datetime
+
+    model_config = {"from_attributes": True}
+
+
 class CreatePlanRequest(BaseModel):
     calculation_record_id: int | None = None
     patient_phone: str | None = None

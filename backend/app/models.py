@@ -21,6 +21,22 @@ class CalculationRecord(Base):
     )
 
 
+class VerificationRecord(Base):
+    __tablename__ = "verification_records"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    procedure_code: Mapped[str] = mapped_column(String(20), nullable=False)
+    procedure_cost: Mapped[float] = mapped_column(Float, nullable=False)
+    insurance_plan_type: Mapped[str] = mapped_column(String(10), nullable=False)
+    patient_age: Mapped[int] = mapped_column(Integer, nullable=False)
+    predicted_coverage_pct: Mapped[float] = mapped_column(Float, nullable=False)
+    approval_probability: Mapped[float] = mapped_column(Float, nullable=False)
+    recommended_action: Mapped[str] = mapped_column(String(20), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime, server_default=func.now(), nullable=False
+    )
+
+
 class PaymentPlan(Base):
     __tablename__ = "payment_plans"
 
